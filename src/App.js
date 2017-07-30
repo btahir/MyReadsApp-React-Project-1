@@ -1,6 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -10,8 +11,33 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true
+    showSearchPage: false,
+    allBooks: [
+
+      {
+          "id": "sample1",
+          "name": "To Kill a Mockingbird",
+          "author": "Harper Lee",
+          "backgroundImage": "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api",
+          "shelf": "currentlyReading"
+        }
+
+    ]
   }
+
+  // componentDidMount() {
+  //   BooksAPI.getAll().then((allBooks) => {
+  //     this.setState({allBooks})
+  //   })
+  // }
+
+  updateQuery = (query) => {
+    // console.log(this.state.allBooks);
+    this.setState( (p) => {
+      p.allBooks[0].shelf = query;
+    })
+  }
+
 
   render() {
     return (
@@ -21,16 +47,16 @@ class BooksApp extends React.Component {
             <div className="search-books-bar">
               <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
               <div className="search-books-input-wrapper">
-                {/* 
+                {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
                   You can find these search terms here:
                   https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                  
+
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input type="text" placeholder="Search by title or author"/>
-                
+
               </div>
             </div>
             <div className="search-books-results">
@@ -51,9 +77,9 @@ class BooksApp extends React.Component {
                       <li>
                         <div className="book">
                           <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")' }}></div>
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.state.allBooks[0].backgroundImage})` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select onChange={ (event) => this.updateQuery( event.target.value )}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -62,8 +88,8 @@ class BooksApp extends React.Component {
                               </select>
                             </div>
                           </div>
-                          <div className="book-title">To Kill a Mockingbird</div>
-                          <div className="book-authors">Harper Lee</div>
+                          <div className="book-title">{this.state.allBooks[0].name}</div>
+                          <div className="book-authors">{this.state.allBooks[0].author}</div>
                         </div>
                       </li>
                       <li>
