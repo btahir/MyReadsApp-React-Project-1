@@ -115,42 +115,28 @@ class BooksApp extends React.Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.state.allBooks[0].backgroundImage})` }}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={ (event) => this.updateQuery( event.target.value )}>
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
+                      {this.state.allBooks.map( book => (
+                        book.shelf === 'currentlyReading' && (
+                          <li key={book.id}>
+                            <div className="book">
+                              <div className="book-top">
+                                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.backgroundImage})` }}></div>
+                                <div className="book-shelf-changer">
+                                  <select onChange={ (event) => this.updateQuery( event.target.value )}>
+                                    <option value="none" disabled>Move to...</option>
+                                    <option value="currentlyReading">Currently Reading</option>
+                                    <option value="wantToRead">Want to Read</option>
+                                    <option value="read">Read</option>
+                                    <option value="none">None</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="book-title">{book.name}</div>
+                              <div className="book-authors">{book.author}</div>
                             </div>
-                          </div>
-                          <div className="book-title">{this.state.allBooks[0].name}</div>
-                          <div className="book-authors">{this.state.allBooks[0].author}</div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url(${this.state.allBooks[1].backgroundImage})` }}></div>
-                            <div className="book-shelf-changer">
-                              <select>
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{this.state.allBooks[1].name}</div>
-                          <div className="book-authors">{this.state.allBooks[1].author}</div>
-                        </div>
-                      </li>
+                          </li>
+                        )
+                      ))}
                     </ol>
                   </div>
                 </div>
