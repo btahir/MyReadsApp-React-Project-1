@@ -72,10 +72,10 @@ class BooksApp extends React.Component {
   //   })
   // }
 
-  updateQuery = (query) => {
-    // console.log(this.state.allBooks);
+  updateShelf = (id, newshelf) => {
     this.setState( (p) => {
-      p.allBooks[0].shelf = query;
+      let bookUpdate = p.allBooks.filter( book => book['id'] === id);
+      bookUpdate[0].shelf = newshelf;
     })
   }
 
@@ -122,7 +122,7 @@ class BooksApp extends React.Component {
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.backgroundImage})` }}></div>
                                 <div className="book-shelf-changer">
-                                  <select onChange={ (event) => this.updateQuery( event.target.value )}>
+                                  <select value={book.shelf} onChange={ (event) => this.updateShelf( book.id, event.target.value )}>
                                     <option value="none" disabled>Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
@@ -151,7 +151,7 @@ class BooksApp extends React.Component {
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.backgroundImage})` }}></div>
                                 <div className="book-shelf-changer">
-                                  <select onChange={ (event) => this.updateQuery( event.target.value )}>
+                                  <select value={book.shelf} onChange={ (event) => this.updateShelf( book.id, event.target.value )}>
                                     <option value="none" disabled>Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
@@ -180,7 +180,7 @@ class BooksApp extends React.Component {
                               <div className="book-top">
                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.backgroundImage})` }}></div>
                                 <div className="book-shelf-changer">
-                                  <select onChange={ (event) => this.updateQuery( event.target.value )}>
+                                  <select value={book.shelf} onChange={ (event) => this.updateShelf( book.id, event.target.value )}>
                                     <option value="none" disabled>Move to...</option>
                                     <option value="currentlyReading">Currently Reading</option>
                                     <option value="wantToRead">Want to Read</option>
