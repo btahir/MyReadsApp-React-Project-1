@@ -10,21 +10,21 @@ class Search extends React.Component {
 	}
 
 	searchQuery = (query) => {
-		this.setState( (state) => {
-			state.query = query.trim();
-			if(state.query !== '') {
-				let searchResults = BooksAPI.search(state.query, 20);
-				searchResults.then(function(v) {
+		query = query.trim();
+		let searchResults = BooksAPI.search(query, 20);
+		searchResults.then(function(v) {
+			if(v) {
+				this.setState(state => {
 					state.matches = v;
-					console.log('matches are ' + state.matches);
-				});
+					state.query = query;
+				})
 			} else {
+			this.setState(state => {
 				state.matches = [];
+				state.query = query;
+				})
 			}
-		})
-
-		console.log('query is ' + query);
-
+		}.bind(this));
 	}
 
 
@@ -75,8 +75,6 @@ class Search extends React.Component {
 				</div>
 			</div>
 			)
-
-
 	}
 
 
