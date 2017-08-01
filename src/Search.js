@@ -27,17 +27,16 @@ class Search extends React.Component {
 				this.setState(state => {
 					state.matches = response;
 					state.query = query;
-				})
+				});
 			} else {
 				// set state when we do not get search result
 				this.setState(state => {
 					state.matches = [];
 					state.query = query;
-				})
+				});
 			}
 		}.bind(this));
 	}
-
 
 	render() {
 
@@ -86,7 +85,6 @@ class Search extends React.Component {
 			</div>
 			)
 	}
-
 
 }
 
