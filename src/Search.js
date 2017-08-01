@@ -10,37 +10,23 @@ class Search extends React.Component {
 	}
 
 	searchQuery = (query) => {
-		this.setState( (p) => {
-			p.query = query.trim();
-			if(query !== '') {
-				let searchResults = BooksAPI.search(p.query, 20);
+		this.setState( (state) => {
+			state.query = query.trim();
+			if(state.query !== '') {
+				let searchResults = BooksAPI.search(state.query, 20);
 				searchResults.then(function(v) {
-					console.log(v);
-					p.matches = v;
+					state.matches = v;
+					console.log('matches are ' + state.matches);
 				});
+			} else {
+				state.matches = [];
 			}
 		})
 
-
-		// let searchResults = Promise.resolve(BooksAPI.search(query.trim(), 50) );
-		// let resultArray = [];
-
-		// searchResults.then(function(v) {
-
-		//   	for (let i = 0; i < v.length; i++) {
-		//   		resultArray.push(v[i]);
-		// 	}
-
-		// });
-
-		// this.setState( {matches: resultArray } );
-		// console.log(this.state.matches);
-
-
-	// Pull search results. Limited to 50.
-	// matches = BooksAPI.search(query, 50);
+		console.log('query is ' + query);
 
 	}
+
 
 	render() {
 
@@ -53,20 +39,13 @@ class Search extends React.Component {
 	            <div className="search-books-bar">
 	              <Link className="close-search" to="/">Close</Link>
 	              <div className="search-books-input-wrapper">
-	                {/*
-	                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-	                  You can find these search terms here:
-	                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-	                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-	                  you don't find a specific author or title. Every search is limited by search terms.
-	                */}
 	                <input type="text"
 	                placeholder="Search by title or author"
-					value={this.state.query}
+					value={query}
 					onChange={ (event) => this.searchQuery( event.target.value )}/>
 	              </div>
 	            </div>
+	            	{console.log(matches)}
 					{matches.length > 0 ? (
 					    <div className="search-books-results">
 							<ol className="books-grid">
@@ -92,7 +71,7 @@ class Search extends React.Component {
 								))}
 							</ol>
 					    </div>
-					) : (<div></div>)}
+					) : (<div className="search-books-results">No Search Results</div>)}
 				</div>
 			</div>
 			)
