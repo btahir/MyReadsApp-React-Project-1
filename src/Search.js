@@ -15,7 +15,7 @@ class Search extends React.Component {
 		query = query.trim();
 		let searchResults = BooksAPI.search(query, 20);
 		searchResults.then(function(response) {
-			if(response) {
+			if(typeof response !== 'undefined' && typeof response.length !== 'undefined') {
 				// syncing shelf of search results to our bookshelf
 				response.map(items => {
 					this.props.ourBooks.map(book => {
