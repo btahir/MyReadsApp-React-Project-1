@@ -6,22 +6,33 @@ class Search extends React.Component {
 
 	state = {
 		matches: [],
-		query: ''
+		query: '',
+		myBooks: []
 	}
 
+	// search function and setting state for query and matches
 	searchQuery = (query) => {
 		query = query.trim();
 		let searchResults = BooksAPI.search(query, 20);
-		searchResults.then(function(v) {
-			if(v) {
+		searchResults.then(function(response) {
+			if(response) {
+				// syncing shelf of search results to our bookshelf
+				response.map(items => {
+					this.props.ourBooks.map(book => {
+						if (book.id === items.id) {
+							items.shelf = book.shelf;
+						}});
+				});
+				// set state when we get search result
 				this.setState(state => {
-					state.matches = v;
+					state.matches = response;
 					state.query = query;
 				})
 			} else {
-			this.setState(state => {
-				state.matches = [];
-				state.query = query;
+				// set state when we do not get search result
+				this.setState(state => {
+					state.matches = [];
+					state.query = query;
 				})
 			}
 		}.bind(this));
@@ -30,7 +41,7 @@ class Search extends React.Component {
 
 	render() {
 
-		const { onAddShelf } = this.props
+		const { onAddShelf } = this.props;
 		const { matches, query } = this.state;
 
 		return (
@@ -45,7 +56,6 @@ class Search extends React.Component {
 					onChange={ (event) => this.searchQuery( event.target.value )}/>
 	              </div>
 	            </div>
-	            	{console.log(matches)}
 					{matches.length > 0 ? (
 					    <div className="search-books-results">
 							<ol className="books-grid">
