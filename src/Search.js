@@ -13,8 +13,7 @@ class Search extends React.Component {
   // search function and setting state for query and matches
   searchQuery = (query) => {
     query = query.trim();
-    const searchResults = BooksAPI.search(query, 20);
-    searchResults.then(function(response) {
+    BooksAPI.search(query, 20).then(function(response) {
       if (typeof response !== 'undefined' && typeof response.length !== 'undefined') {
       // syncing shelf of search results to our bookshelf
         response.map((items) => {
