@@ -1,3 +1,31 @@
+This project was built on top of the Starter template provided by Udacity for Project 1 of the React Nanodegree.
+
+## Project Summary
+
+This app is built using React.js. The app's purpose is to create a bookshelf usng an API and be able to move around books to different shelves (Currently Reading, Want To Read, Read). We can also do keyword searches
+on the API to add new books. 
+
+## Pre-requisites
+
+You will need node.js and npm (node package manager) installed on your machine to run this app. You can find information on that here: https://docs.npmjs.com/getting-started/installing-node
+
+## Getting Started
+To start app please clone the github repository and run npm install to install all dependencies. The main code is in JSX format so you will need a transpiler such as Babel to compile it to Javascript. Running npm install should take care of this. Once the installation is complete you can run the app by either running the following commands:
+
+```
+npm start
+
+or if you have yarn installed:
+
+yarn start
+
+```
+
+The app should start up at localhost:3000.
+
+
+## Udacity Instructions
+
 This is the starter template for the final assessment project for Udacity's React Fundamentals course, developed by [React Training](https://reacttraining.com). The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
