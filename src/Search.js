@@ -2,21 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
-import throttle from 'lodash';
 
 class Search extends React.Component {
   state = {
     matches: [],
     query: '',
     myBooks: [],
-  }
-
-  componentDidMount() {
-    this.searchQuery = throttle.throttle(this.searchQuery, 1000, {
-    // throttle executes the search after a set number of seconds
-      leading: false,
-      trailing: true
-    })
   }
 
   // search function and setting state for query and matches
