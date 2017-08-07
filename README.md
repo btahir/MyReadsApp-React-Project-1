@@ -2,8 +2,7 @@ This project was built on top of the Starter template provided by Udacity for Pr
 
 ## Project Summary
 
-This app is built using React.js. The app's purpose is to create a bookshelf usng an API and be able to move around books to different shelves (Currently Reading, Want To Read, Read). We can also do keyword searches
-on the API to add new books. 
+MyReads is a bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. It leverages React.js to set and update the different states (categories) of your books.
 
 ## Pre-requisites
 
